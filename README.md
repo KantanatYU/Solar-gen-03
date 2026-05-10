@@ -53,3 +53,15 @@ This application is a smart energy management dashboard that simulates a solar e
    ```bash
    cd simulator/mock-hardware-server
    npm start
+
+project-folder/
+├── index.html      — main page containing UI layout and inline CSS styling
+├── main.js         — application logic for energy calculation and simulator communication
+└── README.md       — project documentation
+
+## Known Limitations
+
+- **Data Persistence:** The `storedEnergy` variable is maintained in the browser's volatile memory. If the page is refreshed, the accumulated energy resets to 0.
+- **Fixed Load Rates:** The discharge rates are fixed at arbitrary values (20 and 30) for simulation purposes and do not represent real-world electrical load curves.
+
+![Dashboard Overview](./screenshot.png)
