@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Solar Management System</title>
+    <script src="../../libs/ecc-web-gui/ecc-web-gui.js"></script>
+    <style>
+        :root { --accent: #00d2ff; --bg: #0f172a; --card: #1e293b; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: white; margin: 0; padding: 40px; }
+        .container { max-width: 900px; margin: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 20px; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .card { background: var(--card); border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid #334155; }
+        
+        /* สไตล์หน้าปัดพลังงาน */
+        .power-gauge { position: relative; width: 200px; height: 100px; margin: 20px auto; overflow: hidden; }
+        .gauge-bg { width: 200px; height: 200px; border: 15px solid #334155; border-radius: 50%; box-sizing: border-box; }
+        #gaugeFill { 
+            position: absolute; top: 0; left: 0; width: 200px; height: 200px; 
+            border: 15px solid var(--accent); border-radius: 50%; box-sizing: border-box;
+            clip-path: inset(50% 0 0 0); transform: rotate(0deg); transition: transform 0.2s linear;
+        }
+        .power-value { font-size: 42px; font-weight: bold; margin-top: -10px; color: var(--accent); text-align: center; }
+        
+        /* สไตล์ปุ่มและสถานะ */
+        .status-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #334155; transition: 0.3s; }
+        .dot.active { background: #10b981; box-shadow: 0 0 12px #10b981; }
+        
+        button { 
+            background: #334155; color: white; border: none; padding: 12px 20px; 
+            border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.2s;
+        }
+        button.on { background: #0ea5e9; }
+        .unit { color: #64748b; font-size: 14px; text-align: center; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1 style="margin:0; font-size: 24px;">SOLAR ENERGY <span style="font-weight:normal; color:#64748b;">| MANAGEMENT</span></h1>
+            <div style="color: #10b981;">● SYSTEM ONLINE</div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2 style="font-size: 14px; color: #94a3b8; text-transform: uppercase; text-align: center;">Stored Energy Level</h2>
+                <div class="power-gauge">
+                    <div class="gauge-bg"></div>
+                    <div id="gaugeFill"></div>
+                </div>
+                <div class="power-value"><span id="wattVal">0</span> <span style="font-size: 18px;">W</span></div>
+                <p class="unit">Energy increases when idle and decreases when loads are active.</p>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 14px; color: #94a3b8; text-transform: uppercase;">Grid Management</h2>
+                
+                <div class="status-item">
+                    <span>Battery Charging (Load 1)</span>
+                    <div id="led0Dot" class="dot"></div>
+                </div>
+                <button id="btnCharge">TOGGLE CHARGING</button>
+
+                <div style="margin-top: 25px;" class="status-item">
+                    <span>Export to Grid (Load 2)</span>
+                    <div id="led1Dot" class="dot"></div>
+                </div>
+                <button id="btnExport">TOGGLE EXPORT</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+</html>
